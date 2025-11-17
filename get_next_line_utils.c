@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 08:41:31 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/17 09:43:55 by laviles          ###   ########.fr       */
+/*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
+/*   Updated: 2025/11/17 10:09:37 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+void	*ft_calloc(size_t nb)
+{
+	char	*ptr;
+	size_t	i;
 
-# ifndef FD_LIMIT
-#  define FD_LIMIT 1024
-
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-
-char	*get_next_line(int fd);
-char	*get_next_line_utils(int fd);
-
-#endif
+	ptr = malloc(nb)g;
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < total_size)
+	{
+		ptr[i] = '\0';
+		i++;
+	}
+	return (ptr);
+}
