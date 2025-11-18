@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 08:41:31 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/17 09:43:55 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/18 20:03:24 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 
-# ifndef FD_LIMIT
-#  define FD_LIMIT 1024
+# define FD_LIMIT 1024
 
 # include <unistd.h>
 # include <stdio.h>
