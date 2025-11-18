@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/17 17:24:49 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/18 12:31:35 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	*my_calloc(size_t nb)
+void	*gnl_calloc(size_t nb)
 {
 	char	*ptr;
 	size_t	i;
@@ -34,8 +34,6 @@ void	*my_calloc(size_t nb)
 char	*my_memcpy(char *dest, char *src, size_t n)
 {
 	size_t	i;
-	size_t	dest_len;
-	size_t	src_len;
 
 	if (!dest && !src)
 		return (NULL);
@@ -50,7 +48,7 @@ char	*my_memcpy(char *dest, char *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *current_line, char const *last_line_read)
 {
 	char	*str;
 	size_t	len;

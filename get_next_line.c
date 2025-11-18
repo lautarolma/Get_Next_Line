@@ -6,16 +6,18 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:23:12 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/17 17:34:05 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/18 12:31:32 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*found_newline(char *buff, int len)
+char	*find_end_line(char *buff)
 {
 	int		i;
 
+	if (!buff)
+		return (NULL);
 	i = 0;
-	while (i++ < len)
+	while (buff[i])
 	{
 		if (buff[i] == '\n')
 			return (&buff[i]);
@@ -24,40 +26,37 @@ char	*found_newline(char *buff, int len)
 	}
 	return (NULL);
 }
-char	*line_reader(static char *current_line, int	fd)
+char	*line_reader(char *current_line, int fd)
 {
 	int		chars_read
 	char	*buff;
-	char	*p;
 	int		i;
 
-	if (!current_line || fd < 0)
+	if (!current_line || fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buff = (char *)calloc(BUFFER_SIZE + 1);
+	buff = (char *)gnl_calloc(BUFFER_SIZE + 1);
 	if (!buff)
 		return (NULL);
-	while (chars_read != EOF)
-	{
-		chars_read = read(fd, buff, BUFFER_SIZE);
-		p = found_newline(buff, chars_read);
-		if (!p)
-			memcpy(current_line, buff, chars_read);	
-		else
-			ft_strjoin(current_line, chars_read);
-	}
-	return (current_line);
+	chars_read = read(fd, buff, BUFFER_SIZE);
+	if (chars_read =< 0)
+		return (NULL);
+	buff[chars_read] = '\0';
+	return (buff);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	**current_line;
-	int			*array[FD_LIMIT];
-	char		*buff_reader[BUFFER_SIZE + 1];
+	static char *rest[fd];
+	char		*current_line;
+	char		*end_of_line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff_reader, 0) < 0)
+	if (fd < 0 || read(fd, buff_reader, 0) < 0) //chequear si el control de permisos en read es correcto.
 		return (NULL);
-	*current_line = NULL;
-	while (array[fd] != EOF)
-		current_line[i] = line_reader(array[fd])
-	
+	*current_line = line_reader(fd);
+	end_of_line = find_end_line(current_line);
+	while (!end_of_line)
+		gnl_strjoin(current_line, line_reader(fd));
+	if (end_of_line)
+		gnl_memcpy(lastline_rest, end_of_line);
+	return (current_line);
 }
