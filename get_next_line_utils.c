@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/18 20:45:28 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/19 07:12:52 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*my_memcpy(char *dest, char *src, size_t n)
 	if (!dest && !src)
 		return (NULL);
 	i = 0;
-	while (i < n)
+	while (src[i])
 	{
 		dest[i] = src[i];
 		i++;
