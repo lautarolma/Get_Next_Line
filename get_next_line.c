@@ -1,98 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/17 06:23:12 by laviles           #+#    #+#             */
+/*   Updated: 2025/11/19 08:12:12 by laviles          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-void	line_reader(int fd, char **rest_ln)
+char	*get_line(char **s_buffer)
+{
+	char	*line;
+	size_t	line_len;
+
+	line_len = (ft_strchr(*s_buffer, '\n') - *s_buffer);
+	write(1, "line_len = ", 11);
+	write(1, &line_len, 1);
+	line = ft_substr(*s_buffer, 0, line_len);
+	return (line);
+}
+
+char	*get_stash(char **s_buffer)
+{
+	char	*stash;
+	size_t	stash_len;
+	char	*ptr;
+	
+	ptr = ft_strchr(*s_buffer, '\n');
+	stash_len = 0;
+	while (ptr[stash_len])
+		stash_len++;
+	write(1, "stash_len = ", 11);
+	write(1, &stash_len, 1);
+	stash = ft_substr(ptr, 0, stash_len);
+	return (stash);
+}
+
+char	*line_reader(int fd, char **s_buffer)
 {
 	char	*buff;
-	int		chrs_read;
-	int		i;
-	char	*tmp;
+	int		r_char;
 
-	chrs_read = 1;
+	if (fd < 0 || !**s_buffer || !*s_buffer)
+		return (NULL);
 	buff = (char *)ft_calloc((BUFFER_SIZE + 1), 1);
-	while (chrs_read > 0 && !ft_strchr(*rest_ln, '\n'))
+	r_char = read(fd, *s_buffer, BUFFER_SIZE);
+	if (r_char == 0)
+		return (NULL);
+	if (r_char < 0)
 	{
-		i = 0;
-		while (i < BUFFER_SIZE)
-			buff[i++] = '\0';
-		chrs_read = read(fd, buff, BUFFER_SIZE);
-		buff[chrs_read] = '\0';
-		write(1, buff, 43);
-		tmp = *rest_ln;
-		*rest_ln = ft_strjoin(*rest_ln, buff);
-		free(tmp);
-		tmp = NULL;
+		free(s_buffer);
+		free(buff);
+		return (write(1, "Read error", 10), NULL);
 	}
+	*s_buffer[r_char] = '\0';
+	*s_buffer = ft_strjoin(&*s_buffer, buff);
 	free(buff);
 	buff = NULL;
+	return (*s_buffer);
 }
 
-char	*line_extract(char **rest_ln)//maybe I need to delete *dst
-{
-	char	*tmp;
-	char	*line;
-	size_t	i;
-
-	i = 0;
-	while (*rest_ln[i])
-	{
-		if (*rest_ln[i] == '\n')
-			break;
-		i++;
-	}
-	if (*rest_ln[i] == '\n')
-		i++;	
-//	write(1, &line_size, 1);
-	line = ft_substr(*rest_ln, 0, i);
-	tmp = *rest_ln;
-	if (i != ft_strlen(*rest_ln))
-		*rest_ln = ft_substr(*rest_ln, i, ft_strlen(*rest_ln));
-	free(tmp);
-	tmp = NULL;
-	return (line);
-}
-/*
-char	*rest_updater(char *rest_ln)
-{
-	char	*str;
-	char	*eol;
-	size_t	rest_size;
-
-	eol = ft_strchr(rest_ln, '\n');
-	rest_size = 0;
-	while (rest_ln[rest_size])
-		rest_size++;
-	rest_size = (&rest_ln[rest_size] - eol);
-	str = (char *)ft_calloc((rest_size + 1), 1);
-	str[++rest_size] = '\0';
-	return (str);
-}
-*/
 char	*get_next_line(int fd)
 {
-	static char	*rest_ln;
+	static char	**s_buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (!rest_ln)
-		rest_ln = (char *)ft_calloc(BUFFER_SIZE + 1, 1);
-//	if (!ft_strchr(rest_ln, '\n'))Verificacion posiblemente innecesaria
-//printf("Start GNL");
-	line_reader(fd, &rest_ln);
-//printf("After reader: %s", rest_ln);
-//	write(1, rest_ln, 42);
-//	line = (char *)ft_calloc(1, 1);
-	line = line_extract(&rest_ln);
-//printf("After extract: %s", rest_ln);
-//	rest_ln = rest_updater(rest_ln);
+	if (!s_buffer)
+	{
+		*s_buffer = (char *)ft_calloc(1, 1);
+		if (!*s_buffer)
+				return (NULL);
+	}
+	while (!ft_strchr(*s_buffer, '\n'))
+		line_reader(fd, &*s_buffer);
+	line = get_line(&*s_buffer);
+	get_stash(&*s_buffer);
 	return (line);
 }
 
-int	main(void)
+int	main()
 {
-	int		fd;
-	
-	fd = open("manguitaaa.txt", O_RDWR);
-	printf("%s", get_next_line(fd));
-	return(0);
+	int		fd = open("manguitaaa.txt", O_RDWR);
+	char	*line;
+
+	line = get_next_line(fd);
+	printf("%s", line);
 }

@@ -22,16 +22,17 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <fcntl.h>
+# include <stddef.h>
+# include <fcntl.h>
 
-size_t	ft_strlen(const char *s);
-char    *ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_memcpy(char *dest, char *src, size_t n);
-char	*ft_strchr(char *s, int c);
-void	*ft_calloc(size_t nb, size_t size);
 char	*get_next_line(int fd);
-char	*line_extract(char **rest_ln);
-void	line_reader(int fd, char **rest_ln);
+char	*line_reader(int fd, char **s_buffer);
+char	*get_stash(char **s_buffer);
+char	*get_line(char **s_buffer);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char **s_buffer, char *buff);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+void	*ft_calloc(size_t nmemb, size_t size);
+size_t	ft_strlen(char *s);
 
 #endif
