@@ -25,14 +25,14 @@
 # include <stddef.h>
 # include <fcntl.h>
 
-char	*get_next_line(int fd);
-char	*line_reader(int fd, char **s_buffer);
-char	*get_stash(char **s_buffer);
-char	*get_line(char **s_buffer);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char **s_buffer, char *buff);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(char *s);
+char    *get_line(char **s_buffer);
+void    get_stash(char **s_buffer);
+void    line_reader(int fd, char **s_buffer);
+char    *get_next_line(int fd);
+size_t  ft_strlen(char *s);
+void    *ft_calloc(size_t nmemb, size_t size);
+char    *ft_substr(char *s, unsigned int start, size_t len);
+char    *ft_strjoin(char *s_buffer, char *buff);
+char    *ft_strchr(const char *s, int c);
 
 #endif

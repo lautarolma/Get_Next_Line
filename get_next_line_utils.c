@@ -16,6 +16,8 @@ size_t	ft_strlen(char *s)
 {
 	char	*start;
 
+	if (!s)
+		return(0);
 	start = s;
 	while (*start)
 	{
@@ -33,7 +35,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	if (!ptr)
 		return (NULL);
 	i = 0;
-	while (i < nmemb)
+	while (i < (nmemb * size))
 	{
 		ptr[i] = '\0';
 		i++;
@@ -67,36 +69,36 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (dst);
 }
 
-char	*ft_strjoin(char **s_buffer, char *buff)
+char	*ft_strjoin(char *s_buffer, char *buff)
 {
 	char	*str;
-	size_t	len;
+	size_t	total_len;
 	size_t	i;
 	size_t	j;
 
-	if (!*s_buffer || !buff)
+	if (!s_buffer || !buff)
 		return (NULL);
-	len = 0;
-	while (*s_buffer[len])
-		len++;
-	while (buff[len])
-		len++;
-	str = (char *)calloc((len + 1), sizeof(char));
+	total_len = ft_strlen(s_buffer) + ft_strlen(buff);
+	str = (char *)calloc((total_len + 1), sizeof(char));
 	if (!str)
+	{
+		free(s_buffer);
 		return (NULL);
+	}
 	i = -1;
-	while (*s_buffer[++i])
-		str[i] = *s_buffer[i];
+	while (s_buffer[++i])
+		str[i] = s_buffer[i];
 	j = -1;
 	while (buff[++j])
 		str[i + j] = buff[j];
 	str[i + j] = '\0';
+	free(s_buffer);
 	return (str);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	char			*char_s;
+	char		*char_s;
 	unsigned char	uchar_c;
 
 	if (!s)
