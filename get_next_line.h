@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 08:41:31 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/26 00:58:17 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/26 21:32:32 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 # include <stddef.h>
 # include <fcntl.h>
 
-char    *get_line(char **s_buffer);
-void    get_stash(char **s_buffer);
-int	    line_reader(int fd, char **s_buffer);
-char    *get_next_line(int fd);
-size_t  ft_strlen(char *s);
-void    *ft_calloc(size_t nmemb, size_t size);
-char    *ft_substr(char *s, unsigned int start, size_t len);
-char    *ft_strjoin(char *s_buffer, char *buff);
-char    *ft_strchr(const char *s, int c);
+char	*get_next_line(int fd);
+int		line_reader(int fd, char **s_buffer);
+char	*get_line(char **s_buffer);
+void	get_stash(char **s_buffer);
+void	*ft_calloc(size_t nmemb, size_t size);
+size_t	ft_strlen(char *s);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strjoin(char *s_buffer, char *buff);
+char	*ft_strchr(const char *s, int c);
 
 #endif

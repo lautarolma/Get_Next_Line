@@ -1,7 +1,0 @@
-hola caracola
-
-Lorem ipsum dolor sit amet,.
-Nulla imperdiet lorem turpis.
-Interdum et malesuada fames .
-
-eof

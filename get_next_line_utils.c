@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/26 01:06:55 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/26 22:22:48 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ size_t	ft_strlen(char *s)
 	size_t	i;
 
 	if (!s)
-		return(0);
+		return (0);
 	i = 0;
-	while (start[i])
+	while (s[i])
 		i++;
 	return (i);
 }
@@ -83,18 +83,12 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 		free(s_buffer);
 		return (NULL);
 	}
-	i = 0;
-	while (s_buffer[i])
-	{
+	i = -1;
+	while (s_buffer[++i])
 		str[i] = s_buffer[i];
-		i++;
-	}
-	j = 0;
-	while (buff[j])
-	{
+	j = -1;
+	while (buff[++j])
 		str[i + j] = buff[j];
-		j++;
-	}
 	str[i + j] = '\0';
 	free(s_buffer);
 	return (str);
@@ -102,7 +96,7 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 
 char	*ft_strchr(const char *s, int c)
 {
-	char		*char_s;
+	char			*char_s;
 	unsigned char	uchar_c;
 
 	if (!s)
