@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/19 07:12:52 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/26 01:06:55 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 size_t	ft_strlen(char *s)
 {
-	char	*start;
+	size_t	i;
 
 	if (!s)
 		return(0);
-	start = s;
-	while (*start)
-	{
-		start++;
-	}
-	return (start - s);
+	i = 0;
+	while (start[i])
+		i++;
+	return (i);
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -79,18 +77,24 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 	if (!s_buffer || !buff)
 		return (NULL);
 	total_len = ft_strlen(s_buffer) + ft_strlen(buff);
-	str = (char *)calloc((total_len + 1), sizeof(char));
+	str = (char *)ft_calloc((total_len + 1), sizeof(char));
 	if (!str)
 	{
 		free(s_buffer);
 		return (NULL);
 	}
-	i = -1;
-	while (s_buffer[++i])
+	i = 0;
+	while (s_buffer[i])
+	{
 		str[i] = s_buffer[i];
-	j = -1;
-	while (buff[++j])
+		i++;
+	}
+	j = 0;
+	while (buff[j])
+	{
 		str[i + j] = buff[j];
+		j++;
+	}
 	str[i + j] = '\0';
 	free(s_buffer);
 	return (str);

@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 08:41:31 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/19 05:59:15 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/26 00:58:17 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 4
 # endif
 
 # define FD_LIMIT 1024
@@ -27,7 +27,7 @@
 
 char    *get_line(char **s_buffer);
 void    get_stash(char **s_buffer);
-void    line_reader(int fd, char **s_buffer);
+int	    line_reader(int fd, char **s_buffer);
 char    *get_next_line(int fd);
 size_t  ft_strlen(char *s);
 void    *ft_calloc(size_t nmemb, size_t size);
