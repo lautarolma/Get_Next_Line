@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 03:31:49 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/27 04:19:50 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/27 03:41:01 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *s)
 {
@@ -81,7 +81,6 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 	if (!str)
 	{
 		free(s_buffer);
-		s_buffer = NULL;
 		return (NULL);
 	}
 	i = -1;

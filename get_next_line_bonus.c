@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:23:12 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/27 05:07:26 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/27 03:43:53 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*extract_line(char **s_buffer)
 {
@@ -79,29 +79,29 @@ int	line_reader(int fd, char **s_buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*s_buffer;
+	static char	*s_buffer[FD_LIMIT];
 	char		*line;
 	int			read_status;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= FD_LIMIT || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!s_buffer)
-		s_buffer = (char *)ft_calloc(1, 1);
-	if (!s_buffer)
+	if (!s_buffer[fd])
+		s_buffer[fd] = (char *)ft_calloc(1, 1);
+	if (!s_buffer[fd])
 		return (NULL);
 	read_status = 1;
-	while (!ft_strchr(s_buffer, '\n') && read_status > 0)
-		read_status = line_reader(fd, &s_buffer);
-	if (read_status < 0 || !s_buffer || !*s_buffer)
+	while (!ft_strchr(s_buffer[fd], '\n') && read_status > 0)
+		read_status = line_reader(fd, &s_buffer[fd]);
+	if (read_status < 0 || !s_buffer[fd] || !*s_buffer[fd])
 	{
-		free(s_buffer);
-		s_buffer = NULL;
+		free(s_buffer[fd]);
+		s_buffer[fd] = NULL;
 		return (NULL);
 	}
-	line = extract_line(&s_buffer);
+	line = extract_line(&s_buffer[fd]);
 	if (!line)
-		return (free(s_buffer), s_buffer = NULL, NULL);
-	get_stash(&s_buffer);
+		return (free(s_buffer[fd]), s_buffer[fd] = NULL, NULL);
+	get_stash(&s_buffer[fd]);
 	return (line);
 }
 /*
