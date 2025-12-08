@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:23:12 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/27 05:07:26 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/27 19:16:20 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ int	main(void)
 	char	*line;
 	int		i;
 
-	fd = open("manguitaaa.txt", O_RDONLY);
+	fd = open("giant_line.txt", O_RDONLY);
 	if (fd < 0)
 		return (1);
 	i = 1;
 	while ((line = get_next_line(fd)))
 	{
-		printf("%d ", i);
+		// printf("%d ", i);
 		printf("%s\n", line);
 		i++;
 		free(line);

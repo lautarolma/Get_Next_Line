@@ -6,7 +6,7 @@
 /*   By: laviles <laviles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:23:12 by laviles           #+#    #+#             */
-/*   Updated: 2025/11/27 03:43:53 by laviles          ###   ########.fr       */
+/*   Updated: 2025/11/27 19:26:23 by laviles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,21 +107,26 @@ char	*get_next_line(int fd)
 /*
 int	main(void)
 {
-	int		fd;
-	char	*line;
-	int		i;
-
-	fd = open("manguitaaa.txt", O_RDONLY);
-	if (fd < 0)
-		return (1);
-	i = 1;
-	while ((line = get_next_line(fd)))
-	{
-		printf("%d ", i);
-		printf("%s\n", line);
-		i++;
-		free(line);
-	}
-	close(fd);
-	return (0);
+	fd1 = open("test1.txt", O_RDONLY);
+	fd2 = open("test2.txt", O_RDONLY);
+	fd3 = open("test3.txt", O_RDONLY);
+	if (fd1 < 0 || fd2 < 0 || fd3 < 0)
+		return (printf("Error abriendo archivos\n"), 1);
+	
+	printf("FD1: %s", line = get_next_line(fd1));
+	free(line);
+	printf("FD2: %s", line = get_next_line(fd2));
+	free(line);
+	printf("FD3: %s", line = get_next_line(fd3));
+	free(line);
+	printf("FD1: %s", line = get_next_line(fd1));
+	free(line);
+	printf("FD2: %s", line = get_next_line(fd2));
+	free(line);
+	printf("FD3: %s", line = get_next_line(fd3));
+	free(line);
+	
+	close(fd1);
+	close(fd2);
+	close(fd3);
 }*/
