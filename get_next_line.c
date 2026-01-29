@@ -18,14 +18,14 @@ char	*extract_line(char **s_buffer)
 	size_t	line_len;
 	char	*ptr;
 
-	ptr = ft_strchr(*s_buffer, '\n');
+	ptr = gnl_ft_strchr(*s_buffer, '\n');
 	if (ptr)
 		line_len = (ptr - *s_buffer) + 1;
 	else
-		line_len = ft_strlen(*s_buffer);
+		line_len = gnl_ft_strlen(*s_buffer);
 	if (line_len == 0)
 		return (NULL);
-	line = ft_substr(*s_buffer, 0, line_len);
+	line = gnl_ft_substr(*s_buffer, 0, line_len);
 	return (line);
 }
 
@@ -35,7 +35,7 @@ void	get_stash(char **s_buffer)
 	char	*ptr;
 	char	*stash;
 
-	ptr = ft_strchr(*s_buffer, '\n');
+	ptr = gnl_ft_strchr(*s_buffer, '\n');
 	if (!ptr || !*(ptr + 1))
 	{
 		free(*s_buffer);
@@ -43,8 +43,8 @@ void	get_stash(char **s_buffer)
 		return ;
 	}
 	ptr++;
-	stash_len = ft_strlen(ptr);
-	stash = ft_substr(ptr, 0, stash_len);
+	stash_len = gnl_ft_strlen(ptr);
+	stash = gnl_ft_substr(ptr, 0, stash_len);
 	free(*s_buffer);
 	*s_buffer = stash;
 }
@@ -54,7 +54,7 @@ int	line_reader(int fd, char **s_buffer)
 	char	*buff;
 	int		r_char;
 
-	buff = (char *)ft_calloc((BUFFER_SIZE + 1), 1);
+	buff = (char *)gnl_ft_calloc((BUFFER_SIZE + 1), 1);
 	if (!buff)
 		return (-1);
 	r_char = read(fd, buff, BUFFER_SIZE);
@@ -69,7 +69,7 @@ int	line_reader(int fd, char **s_buffer)
 		return (r_char);
 	}
 	buff[r_char] = '\0';
-	*s_buffer = ft_strjoin(*s_buffer, buff);
+	*s_buffer = gnl_ft_strjoin(*s_buffer, buff);
 	free(buff);
 	buff = NULL;
 	if (!*s_buffer)
@@ -86,11 +86,11 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!s_buffer)
-		s_buffer = (char *)ft_calloc(1, 1);
+		s_buffer = (char *)gnl_ft_calloc(1, 1);
 	if (!s_buffer)
 		return (NULL);
 	read_status = 1;
-	while (!ft_strchr(s_buffer, '\n') && read_status > 0)
+	while (!gnl_ft_strchr(s_buffer, '\n') && read_status > 0)
 		read_status = line_reader(fd, &s_buffer);
 	if (read_status < 0 || !s_buffer || !*s_buffer)
 	{

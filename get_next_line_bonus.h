@@ -29,10 +29,10 @@ char	*get_next_line(int fd);
 int		line_reader(int fd, char **s_buffer);
 char	*extract_line(char **s_buffer);
 void	get_stash(char **s_buffer);
-void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(char *s);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*ft_strjoin(char *s_buffer, char *buff);
-char	*ft_strchr(const char *s, int c);
+void	*gnl_ft_calloc(size_t nmemb, size_t size);
+size_t	gnl_ft_strlen(char *s);
+char	*gnl_ft_substr(char *s, unsigned int start, size_t len);
+char	*gnl_ft_strjoin(char *s_buffer, char *buff);
+char	*gnl_ft_strchr(const char *s, int c);
 
 #endif

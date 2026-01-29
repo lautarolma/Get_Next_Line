@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *s)
+size_t	gnl_ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*gnl_ft_calloc(size_t nmemb, size_t size)
 {
 	char	*ptr;
 	size_t	i;
@@ -41,7 +41,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+char	*gnl_ft_substr(char *s, unsigned int start, size_t len)
 {
 	char		*dst;
 	size_t		i;
@@ -49,9 +49,9 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	slen = ft_strlen(s);
+	slen = gnl_ft_strlen(s);
 	if (start >= slen)
-		return (ft_calloc(1, sizeof(char)));
+		return (gnl_ft_calloc(1, sizeof(char)));
 	if (len > slen - start)
 		len = (slen - start);
 	dst = (char *)malloc(len + 1);
@@ -67,7 +67,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	return (dst);
 }
 
-char	*ft_strjoin(char *s_buffer, char *buff)
+char	*gnl_ft_strjoin(char *s_buffer, char *buff)
 {
 	char	*str;
 	size_t	total_len;
@@ -76,8 +76,8 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 
 	if (!s_buffer || !buff)
 		return (NULL);
-	total_len = ft_strlen(s_buffer) + ft_strlen(buff);
-	str = (char *)ft_calloc((total_len + 1), sizeof(char));
+	total_len = gnl_ft_strlen(s_buffer) + gnl_ft_strlen(buff);
+	str = (char *)gnl_ft_calloc((total_len + 1), sizeof(char));
 	if (!str)
 	{
 		free(s_buffer);
@@ -95,7 +95,7 @@ char	*ft_strjoin(char *s_buffer, char *buff)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gnl_ft_strchr(const char *s, int c)
 {
 	char			*char_s;
 	unsigned char	uchar_c;
